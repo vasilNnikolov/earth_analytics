@@ -53,5 +53,45 @@ def challenge_2():
     ax.set_title("Coaslines, cities and borders")
     plt.show()
 
+def challenge_3():
+    from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+    coastlines_path = os.path.join("data", "earthpy-downloads",
+                                "ne_50m_coastline",
+                                "ne_50m_coastline.shp")
+
+    coastlines = gpd.read_file(coastlines_path)
+    # print(coastlines.head())
+
+    populated_places_path = os.path.join("data", "earthpy-downloads",
+                                        "ne_50m_populated_places_simple",
+                                        "ne_50m_populated_places_simple.shp")
+
+    cities = gpd.read_file(populated_places_path)
+
+    countries_path = os.path.join("data", "earthpy-downloads",
+                              "ne_50m_admin_0_countries", 
+                              "ne_50m_admin_0_countries.shp")
+    
+    countries = gpd.read_file(countries_path)
+
+    f, ax1 = plt.subplots(figsize=(10, 6))
+
+    divider = make_axes_locatable(ax1)
+    cax = divider.append_axes("right",
+                            size="5%",
+                            pad=0.1)
+
+    countries.plot(ax=ax1, color='white',  edgecolor='red')
+    coastlines.plot(ax=ax1, color='darkblue')
+    
+    cities.plot(column='pop_min',
+                legend=True,
+                ax=ax1,
+                cax=cax)
+    
+    plt.show()
+
+
 if __name__ == "__main__":
-    challenge_2()
+    challenge_3()
