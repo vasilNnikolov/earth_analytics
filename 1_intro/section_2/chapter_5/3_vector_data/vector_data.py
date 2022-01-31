@@ -89,10 +89,11 @@ def challenge_3():
                 legend=True,
                 ax=ax1,
                 cax=cax, scheme='quantiles')
-    
     plt.show()
 
 def bonus_challenge():
+    from mpl_toolkits.axes_grid1 import make_axes_locatable
+
     coastlines_path = os.path.join("data", "earthpy-downloads",
                                 "ne_50m_coastline",
                                 "ne_50m_coastline.shp")
@@ -113,11 +114,23 @@ def bonus_challenge():
     countries = gpd.read_file(countries_path)
 
     f, ax1 = plt.subplots(figsize=(10, 6))
+    divider = make_axes_locatable(ax1)
+    cax = divider.append_axes("right",
+                            size="5%",
+                            pad=0.1)
+
 
     french_boundary = countries.loc[countries["SOVEREIGNT"] == "United States of America"]
     french_boundary.plot(ax=ax1)
-    plt.show()
+
+    french_cities = gpd.clip(cities, french_boundary)
+    french_cities.plot(column='pop_max', 
+                       ax=ax1, 
+                       legend=True,
+                       cax=cax,
+                       scheme="quantiles", k=3)
     
     plt.show()
+
 if __name__ == "__main__":
     bonus_challenge()
