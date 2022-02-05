@@ -1,5 +1,4 @@
 import os
-from traceback import print_tb
 from matplotlib import tight_layout
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure

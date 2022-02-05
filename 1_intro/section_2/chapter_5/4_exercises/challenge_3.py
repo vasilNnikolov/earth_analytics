@@ -12,13 +12,13 @@ def get_data():
 
 def main():
     # Creating a home directory
-    home_dir = os.path.join(et.io.HOME, 'earth-analytics',
+    home_dir = os.path.join(et.io.HOME,'earth-analytics-parent', 'earth-analytics',
                             'data', 'earthpy-downloads')
     if not os.path.isdir(home_dir):
         os.makedirs(home_dir)
 
     # Set your working directory
-    os.chdir(os.path.join(et.io.HOME,
+    os.chdir(os.path.join(et.io.HOME, 'earth-analytics-parent',
                         'earth-analytics',
                         'data',
                         'earthpy-downloads'))
